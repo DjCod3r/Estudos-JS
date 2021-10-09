@@ -18,20 +18,13 @@ const getTurma = (letra, callback) => {
         })
     })
 }
+let obterAluos = async () => {
+    const turmaA = await getTurma('A');
+    const turmaB = await getTurma('B');
+    const turmaC = await getTurma('C');
+    return [].concat(turmaA, turmaB , turmaC)
+}
 
-
-let nomes =[]
-getTurma('A').then(alunos => {
-    console.log(alunos[0])
-    nomes = nomes.concat(alunos.map(a => `A: ${a.nome}`))
-  getTurma('B').then(alunos =>{
-    nomes = nomes.concat(alunos.map(a => `B ${a.nome}`))
-        console.log(nomes)
-})
- })
-
-
- Promise.all([getTurma('A'), getTurma('B')])
-.then(turmas => [].concat(...turmas))
-.then(alunos => alunos.map(aluno => aluno.nome))
+obterAluos()
+.then(alunos => alunos.map(a => a.nome))
 .then(nomes => console.log(nomes))
